@@ -7,4 +7,4 @@ os.chdir(dir)
 current_path = os.getcwd()
 print("Changed working directory to: %s\n" % current_path)
 
-print parsetools.insert_statement_for_all_from_dir(current_path + "/test_data")
+print parsetools.snapshot_dump_from_dir(current_path + "/test_data")

@@ -1,5 +1,5 @@
 __author__ = 'Nikolay Kulmatitskiy'
 
-from entries import insert_statement_for_all_from_dir
+from entries import *
 
-__all__ = ["insert_statement_for_all_from_dir"]
+__all__ = ["snapshot_dump_from_dir"]

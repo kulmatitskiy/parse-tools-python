@@ -30,6 +30,8 @@ class Column(object):
 
 
 class TextColumn(Column):
+    db_type = 'text'
+
     @classmethod
     def check(cls, key, val):
         return True
@@ -40,6 +42,8 @@ class TextColumn(Column):
 
 
 class BooleanColumn(Column):
+    db_type = 'boolean'
+
     @classmethod
     def check(cls, key, val):
         return isinstance(val, bool)
@@ -51,6 +55,8 @@ class BooleanColumn(Column):
 
 
 class NumericColumn(Column):
+    db_type = 'numeric'
+
     @classmethod
     def check(cls, key, val):
         return isinstance(val, numbers.Number)
@@ -62,6 +68,8 @@ class NumericColumn(Column):
 
 
 class DateColumn(Column):
+    db_type = 'timestamp without time zone'
+
     @classmethod
     def check(cls, key, val):
         return isinstance(val, dict) and val.get('__type') == 'Date'
@@ -76,6 +84,8 @@ class DateColumn(Column):
 
 
 class StampColumn(Column):
+    db_type = 'timestamp without time zone'
+
     @classmethod
     def check(cls, key, val):
         return key == 'updatedAt' or key == 'createdAt'
@@ -86,6 +96,8 @@ class StampColumn(Column):
 
 
 class GeoPointColumn(Column):
+    db_type = 'text'
+
     @classmethod
     def check(cls, key, val):
         return isinstance(val, dict) and val.get('__type') == 'GeoPoint'
@@ -97,6 +109,8 @@ class GeoPointColumn(Column):
 
 
 class PointerColumn(Column):
+    db_type = 'text'
+
     @classmethod
     def check(cls, key, val):
         return isinstance(val, dict) and val.get('__type') == 'Pointer'
