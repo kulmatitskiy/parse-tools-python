@@ -20,7 +20,7 @@ def make_create_table_query(table_name, columns, drop_if_exists=True):
     else:
         stmt += "CREATE TABLE IF NOT EXISTS %s\n(\n" % table_name
 
-    stmt += ',\n'.join(map(lambda c: "  %s %s" % (c.name, c.db_type), columns)) + "\n);\n"
+    stmt += ',\n'.join(map(lambda c: "  %s %s" % (c.db_name, c.db_type), columns)) + "\n);\n"
     return stmt
 
 

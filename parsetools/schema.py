@@ -8,10 +8,12 @@ def on_wrong_type(col_name, col_type):
 
 
 class Column(object):
-    name = ""
+    db_name = ""
+    parse_name = ""
 
     def __init__(self, name):
-        self.name = name
+        self.db_name = name if name != 'objectId' else 'object_id'
+        self.parse_name = name
 
     @classmethod
     def check(cls, key, val):
@@ -51,7 +53,7 @@ class BooleanColumn(Column):
     def insert_str_for_val(self, val):
         if BooleanColumn.check(None, val):
             return 'TRUE' if val else 'FALSE'
-        return on_wrong_type(self.name, 'Boolean')
+        return on_wrong_type(self.parse_name, 'Boolean')
 
 
 class NumericColumn(Column):
@@ -64,7 +66,7 @@ class NumericColumn(Column):
     def insert_str_for_val(self, val):
         if NumericColumn.check(None, val):
             return str(val)
-        return on_wrong_type(self.name, 'Numeric')
+        return on_wrong_type(self.parse_name, 'Numeric')
 
 
 class DateColumn(Column):
@@ -80,11 +82,15 @@ class DateColumn(Column):
         iso = val.get('iso')
         if isinstance(iso, (str, unicode)):
             return "\'%s\'" % str(iso).replace('T', ' ')[:-5]
-        return on_wrong_type(self.name, 'Date')
+        return on_wrong_type(self.parse_name, 'Date')
 
 
 class StampColumn(Column):
     db_type = 'timestamp without time zone'
+
+    def __init__(self, name):
+        self.parse_name = name
+        self.db_name = "created_at" if name == 'createdAt' else 'updated_at'
 
     @classmethod
     def check(cls, key, val):
@@ -105,11 +111,15 @@ class GeoPointColumn(Column):
     def insert_str_for_val(self, val):
         if GeoPointColumn.check(None, val):
             return str(val.get('longitude')) + ', ' + str(val.get('latitude'))
-        return on_wrong_type(self.name, 'GeoPoint')
+        return on_wrong_type(self.parse_name, 'GeoPoint')
 
 
 class PointerColumn(Column):
     db_type = 'text'
+
+    def __init__(self, name):
+        self.parse_name = name
+        self.db_name = name + "_id"
 
     @classmethod
     def check(cls, key, val):
@@ -121,20 +131,20 @@ class PointerColumn(Column):
         objid = val.get('objectId')
         if isinstance(objid, (str, unicode)):
             return "\'%s\'" % str(objid)
-        return on_wrong_type(self.name, 'Pointer')
+        return on_wrong_type(self.parse_name, 'Pointer')
 
 
 def make_col_name_tuple(columns):
-    return "(" + ", ".join(map(lambda col: col.name, columns)) + ")"
+    return "(" + ", ".join(map(lambda col: col.db_name, columns)) + ")"
 
 
 def make_insert_tuple(obj, columns):
     inserts = []
     for col in columns:
-        if col.name not in obj:
+        if col.parse_name not in obj:
             inserts.append("NULL")
         else:
-            inserts.append(col.insert_str_for_val(obj[col.name]))
+            inserts.append(col.insert_str_for_val(obj[col.parse_name]))
 
     return "(" + ", ".join(inserts) + ")"
 
