@@ -1,5 +1,6 @@
 from schema import Column, make_insert_tuple, make_col_name_tuple
 from jsondump import *
+import pandas as pd
 import time
 
 def columns_from_list_of_entries(entries):
@@ -27,6 +28,9 @@ def make_create_table_query(table_name, columns, drop_if_exists=True):
 def make_insert_query(table_name, columns, entries):
     tuples = map(lambda entry: make_insert_tuple(entry, columns), entries)
     return "INSERT INTO %s\n  %s\nVALUES\n  %s;\n" % (table_name, make_col_name_tuple(columns), ",\n  ".join(tuples))
+
+def make_data_frame(columns, entries):
+    # TODO
 
 def snapshot_dump_from_dir(input_path):
     schema_name = "Snapshot_%s" % time.strftime("%Y_%m_%d")
