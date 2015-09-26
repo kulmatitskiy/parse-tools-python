@@ -28,6 +28,7 @@ Features ready:
  - Parse Numeric => Numeric
  - Everything else => Text
 - **Directory-based snapshots**: Getting all `<class>.json` files from a directory, creating a new schema named `Snapshot_YYYY_MM_DD` and converting each file into a new table named `<class>`, rows filled with class instances.
+- **Pandas DataFrame**: Converting result sets into Pandas DataFrames with appropriate column `dtype`s.
 
 Future features:
 - Http-based snapshots
@@ -41,4 +42,6 @@ virtualenv -p /usr/bin/python2.7 env
 env/bin/pip install -r requirements.txt
 env/bin/python test.py
 ```
-[todo]
+[Todo 1: add sample data sets and explain test.py for Postgres usage]
+[Todo 2: use IPython notebook for better illustration of working with Pandas DataFrame]
+
