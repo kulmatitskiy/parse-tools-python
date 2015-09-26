@@ -22,11 +22,13 @@ def make_create_table_query(table_name, columns, drop_if_exists=True):
         stmt += "CREATE TABLE IF NOT EXISTS %s\n(\n" % table_name
 
     stmt += ',\n'.join(map(lambda c: "  %s %s" % (c.db_name, c.db_type), columns)) + "\n);\n"
+    stmt += ',\n'.join(["  %s %s" % (c.db_name, c.db_type) for c in columns]) + "\n);\n"
     return stmt
 
 
 def make_insert_query(table_name, columns, entries):
     tuples = map(lambda entry: make_insert_tuple(entry, columns), entries)
+    tuples = [make_insert_tuple(entry, columns) for entry in entries]
     return "INSERT INTO %s\n  %s\nVALUES\n  %s;\n" % (table_name, make_col_name_tuple(columns), ",\n  ".join(tuples))
 
 def make_data_frame(columns, entries):
