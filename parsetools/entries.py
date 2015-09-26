@@ -1,7 +1,8 @@
-from schema import Column, make_insert_tuple, make_col_name_tuple
+from schema import Column, IdColumn, make_insert_tuple, make_col_name_tuple
 from jsondump import *
 import pandas as pd
 import time
+import logging
 
 def columns_from_list_of_entries(entries):
     if len(entries) == 0:
@@ -21,18 +22,33 @@ def make_create_table_query(table_name, columns, drop_if_exists=True):
     else:
         stmt += "CREATE TABLE IF NOT EXISTS %s\n(\n" % table_name
 
-    stmt += ',\n'.join(map(lambda c: "  %s %s" % (c.db_name, c.db_type), columns)) + "\n);\n"
     stmt += ',\n'.join(["  %s %s" % (c.db_name, c.db_type) for c in columns]) + "\n);\n"
     return stmt
 
 
 def make_insert_query(table_name, columns, entries):
-    tuples = map(lambda entry: make_insert_tuple(entry, columns), entries)
     tuples = [make_insert_tuple(entry, columns) for entry in entries]
     return "INSERT INTO %s\n  %s\nVALUES\n  %s;\n" % (table_name, make_col_name_tuple(columns), ",\n  ".join(tuples))
 
-def make_data_frame(columns, entries):
-    # TODO
+
+def make_data_frame(entries):
+    columns = columns_from_list_of_entries(entries)
+    out = dict()
+    for entry in entries:
+        id = None
+        new_entry = dict()
+        for column in columns:
+            if isinstance(column, IdColumn):
+                id = entry[column.parse_name]
+            else:
+                new_entry[column.db_name] = column.plain_val(entry[column.parse_name])
+        if id:
+            out[id] = new_entry
+        else:
+            logging.warning("Found an entry with missing objectId; skipping.")
+
+    return pd.DataFrame.from_dict(out, orient='index')
+
 
 def snapshot_dump_from_dir(input_path):
     schema_name = "Snapshot_%s" % time.strftime("%Y_%m_%d")
