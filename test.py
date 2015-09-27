@@ -15,10 +15,15 @@ db_settings = {
 def what_to_do(db_con, db_cur):
     # --- Insert your method calls here ---
     snapshot_dir = "/test_data"
-    statements = parsetools.snapshot_dump_from_dir(current_path + snapshot_dir)
-    print(statements)
-    db_cur.execute(statements)
-    db_con.commit()
+    # statements = parsetools.snapshot_dump_from_dir(current_path + snapshot_dir)
+    # print(statements)
+    # db_cur.execute(statements)
+    # db_con.commit()
+
+    entries = parsetools.load_all_json_entries_at_once(current_path + snapshot_dir + "/Order.json")
+    df = parsetools.make_data_frame(entries)
+    print(df.head(), df.dtypes)
+
 
 #
 
