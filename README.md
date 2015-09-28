@@ -42,6 +42,10 @@ virtualenv -p /usr/bin/python2.7 env
 env/bin/pip install -r requirements.txt
 env/bin/python test.py
 ```
-[Todo 1: add sample data sets and explain test.py for Postgres usage]
-[Todo 2: use IPython notebook for better illustration of working with Pandas DataFrame]
+
+#### Example 1: Using parsetools with Pandas DataFrame
+See this [IPython Notebook](Example%201%20-%20Using%20Parsetools%20with%20Pandas%20DataFrame.ipynb).
+
+#### Example 2: Using parsetools with Postgres
+[Todo: add example]
 
