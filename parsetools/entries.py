@@ -1,6 +1,7 @@
 from schema import Column, IdColumn, make_insert_tuple, make_col_name_tuple
 from jsondump import *
 import pandas as pd
+from numpy import nan
 import time
 import logging
 
@@ -13,6 +14,7 @@ def columns_from_list_of_entries(entries):
     for k, v in first.iteritems():
         columns.append(Column.create(k, v))
     return columns
+
 
 def make_create_table_query(table_name, columns, drop_if_exists=True):
     stmt = ""
@@ -38,10 +40,14 @@ def make_data_frame(entries):
         id = None
         new_entry = dict()
         for column in columns:
-            if isinstance(column, IdColumn):
-                id = entry[column.parse_name]
-            else:
-                new_entry[column.db_name] = column.plain_val(entry[column.parse_name])
+            try:
+                if isinstance(column, IdColumn):
+                    id = entry[column.parse_name]
+                else:
+                    new_entry[column.db_name] = column.plain_val(entry[column.parse_name])
+            except KeyError:
+                new_entry[column.db_name] = nan
+
         if id:
             out[id] = new_entry
         else:
