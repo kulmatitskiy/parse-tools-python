@@ -1,0 +1,128 @@
+{ "results": [
+	{
+        "amount": 15.75,
+        "city": "Koeln",
+        "coord": {
+            "__type": "GeoPoint",
+            "latitude": 52.534719,
+            "longitude": 13.371094
+        },
+        "createdAt": "2015-09-28T19:49:16.928Z",
+        "customer": {
+            "__type": "Pointer",
+            "className": "_User",
+            "objectId": "Wgb58JpdJV"
+        },
+        "deliveryDate": {
+            "__type": "Date",
+            "iso": "2015-11-19T19:51:00.000Z"
+        },
+        "isGift": false,
+        "objectId": "1G0jLQT0Ed",
+        "updatedAt": "2015-09-28T19:55:03.791Z"
+    },
+	{
+        "amount": 24.95,
+        "city": "Dresden",
+        "createdAt": "2015-09-28T19:49:23.643Z",
+        "customer": {
+            "__type": "Pointer",
+            "className": "_User",
+            "objectId": "1BPwfcrsQ2"
+        },
+        "deliveryDate": {
+            "__type": "Date",
+            "iso": "2015-10-01T19:50:00.000Z"
+        },
+        "isGift": false,
+        "objectId": "2N1nDn4uYb",
+        "updatedAt": "2015-09-28T19:54:39.060Z"
+    },
+	{
+        "amount": 13.95,
+        "city": "Leipzig",
+        "coord": {
+            "__type": "GeoPoint",
+            "latitude": 52.534719,
+            "longitude": 13.371094
+        },
+        "createdAt": "2015-09-28T19:49:14.293Z",
+        "customer": {
+            "__type": "Pointer",
+            "className": "_User",
+            "objectId": "1BPwfcrsQ2"
+        },
+        "deliveryDate": {
+            "__type": "Date",
+            "iso": "2015-10-02T19:51:00.000Z"
+        },
+        "isGift": true,
+        "objectId": "B5mGp8nQUY",
+        "updatedAt": "2015-09-28T19:55:06.367Z"
+    },
+	{
+        "amount": 19.99,
+        "city": "Berlin",
+        "coord": {
+            "__type": "GeoPoint",
+            "latitude": 52.534719,
+            "longitude": 13.371094
+        },
+        "createdAt": "2015-09-28T19:49:18.979Z",
+        "customer": {
+            "__type": "Pointer",
+            "className": "_User",
+            "objectId": "7H4jfTgHgb"
+        },
+        "deliveryDate": {
+            "__type": "Date",
+            "iso": "2015-10-10T19:51:00.000Z"
+        },
+        "isGift": false,
+        "objectId": "BvSnfDNjIQ",
+        "updatedAt": "2015-09-28T19:55:02.479Z"
+    },
+	{
+        "amount": 13.95,
+        "city": "Dresden",
+        "coord": {
+            "__type": "GeoPoint",
+            "latitude": 52.534719,
+            "longitude": 13.371094
+        },
+        "createdAt": "2015-09-28T19:49:35.158Z",
+        "customer": {
+            "__type": "Pointer",
+            "className": "_User",
+            "objectId": "7H4jfTgHgb"
+        },
+        "deliveryDate": {
+            "__type": "Date",
+            "iso": "2015-10-14T19:50:00.000Z"
+        },
+        "isGift": false,
+        "objectId": "DqVBAEG04U",
+        "updatedAt": "2015-09-28T19:54:00.096Z"
+    },
+	{
+        "city": "Munich",
+        "coord": {
+            "__type": "GeoPoint",
+            "latitude": 52.534719,
+            "longitude": 13.371094
+        },
+        "createdAt": "2015-09-28T19:49:31.299Z",
+        "customer": {
+            "__type": "Pointer",
+            "className": "_User",
+            "objectId": "Wgb58JpdJV"
+        },
+        "deliveryDate": {
+            "__type": "Date",
+            "iso": "2015-09-30T19:50:00.000Z"
+        },
+        "isGift": true,
+        "objectId": "FMI1sEaF1T",
+        "updatedAt": "2015-09-28T19:55:18.682Z"
+    }
+] }
